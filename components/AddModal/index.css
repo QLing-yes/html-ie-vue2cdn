@@ -1,18 +1,16 @@
-/* AddModal.css — 作用域前缀 .am- */
-
 .am-box {
-  background: var(--surface);
-  border-radius: var(--r-lg);
+  background: #ffffff;
+  border-radius: 12px;
   width: 100%;
   max-width: 440px;
-  -webkit-box-shadow: var(--shadow-md);
-          box-shadow: var(--shadow-md);
+  -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.10);
+          box-shadow: 0 4px 16px rgba(0,0,0,.10);
   overflow: hidden;
 }
 
 .am-head {
   padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e4e2da;
   font-size: 15px;
   font-weight: 600;
 }
@@ -23,30 +21,30 @@
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
-  gap: 14px;
 }
 
 .am-label {
   display: block;
   font-size: 12px;
   font-weight: 500;
-  color: var(--muted);
+  color: #6b6b67;
   margin-bottom: 5px;
 }
 
 .am-row {
   display: -ms-flexbox;
   display: flex;
-  gap: 12px;
 }
 .am-row > div { -ms-flex: 1; flex: 1; }
+.am-row > div:first-child { margin-right: 12px; }
 
 .am-foot {
   padding: 14px 20px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #e4e2da;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: end;
       justify-content: flex-end;
-  gap: 8px;
 }
+.am-foot .btn { margin-left: 8px; }
+.am-foot .btn:first-child { margin-left: 0; }

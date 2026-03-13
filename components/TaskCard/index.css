@@ -1,19 +1,19 @@
-/* TaskCard.css — 作用域前缀 .tc- */
-
 .tc-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
+  background: #ffffff;
+  border: 1px solid #e4e2da;
+  border-radius: 12px;
   padding: 14px 16px;
-  -webkit-box-shadow: var(--shadow-sm);
-          box-shadow: var(--shadow-sm);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.08);
+          box-shadow: 0 1px 3px rgba(0,0,0,.08);
   -webkit-transition: -webkit-box-shadow .15s, border-color .15s;
           transition: box-shadow .15s, border-color .15s;
   cursor: default;
+  margin-bottom: 10px;
 }
+.tc-card:last-child { margin-bottom: 0; }
 .tc-card:hover {
-  -webkit-box-shadow: var(--shadow-md);
-          box-shadow: var(--shadow-md);
+  -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.10);
+          box-shadow: 0 4px 16px rgba(0,0,0,.10);
   border-color: #ccc;
 }
 .tc-card--done { opacity: .5; }
@@ -32,7 +32,12 @@
   cursor: pointer;
   -ms-flex-negative: 0;
       flex-shrink: 0;
-  accent-color: var(--primary);
+}
+.tc-check::-ms-check {
+  background: #fff;
+  border: 1px solid #e4e2da;
+  border-radius: 3px;
+  color: #2563eb;
 }
 
 .tc-title {
@@ -44,21 +49,21 @@
 }
 .tc-title--done {
   text-decoration: line-through;
-  color: var(--muted);
+  color: #6b6b67;
 }
 
 .tc-del {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--hint);
+  color: #a8a8a3;
   font-size: 18px;
   line-height: 1;
   padding: 0 2px;
   -webkit-transition: color .1s;
           transition: color .1s;
 }
-.tc-del:hover { color: var(--danger); }
+.tc-del:hover { color: #dc2626; }
 
 .tc-meta {
   margin-top: 10px;
@@ -72,30 +77,29 @@
       flex-wrap: wrap;
 }
 
-/* 优先级徽章 */
 .tc-badge {
   font-size: 11px;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 20px;
 }
-.tc-badge--high   { background: var(--danger-l);  color: var(--danger); }
-.tc-badge--medium { background: var(--warn-l);    color: var(--warn); }
-.tc-badge--low    { background: var(--success-l); color: var(--success); }
+.tc-badge--high   { background: #fef2f2; color: #dc2626; }
+.tc-badge--medium { background: #fffbeb; color: #d97706; }
+.tc-badge--low    { background: #f0fdf4; color: #16a34a; }
 
 .tc-tag {
   font-size: 11px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
+  background: #f5f4f0;
+  border: 1px solid #e4e2da;
+  border-radius: 4px;
   padding: 1px 7px;
-  color: var(--muted);
+  color: #6b6b67;
 }
 
 .tc-assignee {
   margin-left: auto;
   font-size: 11px;
-  color: var(--muted);
+  color: #6b6b67;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -105,8 +109,8 @@
 .tc-avatar {
   width: 20px; height: 20px;
   border-radius: 50%;
-  background: var(--primary-l);
-  color: var(--primary);
+  background: #eff6ff;
+  color: #2563eb;
   font-size: 10px;
   font-weight: 700;
   display: -ms-flexbox;
