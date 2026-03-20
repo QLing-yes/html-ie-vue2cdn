@@ -1,0 +1,11 @@
+<div class="counter">
+  <h2 class="counter-title">计数器</h2>
+  <div class="counter-display" v-bind:class="{ negative: count < 0 }">
+    {{ count }}
+  </div>
+  <div class="counter-actions">
+    <button class="btn btn-minus" v-on:click="decrement">−</button>
+    <button class="btn btn-reset" v-on:click="reset">重置</button>
+    <button class="btn btn-plus" v-on:click="increment">+</button>
+  </div>
+</div>

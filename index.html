@@ -1,88 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>任务板</title>
-
+  <title>Vue2cdn多文件组件化IE兼容</title>
   <script src="lib/core-js-minified.js"></script>
-  <script src="lib/fetch.umd.min.js"></script>
   <script src="lib/vue2.7.16.min.js"></script>
-
-  <link rel="stylesheet" href="styles/base.css">
-
-  <style>
-    .page { max-width: 680px; margin: 0 auto; padding: 24px 20px 64px; }
-    .task-list {
-      display: -ms-flexbox; display: flex;
-      -ms-flex-direction: column; flex-direction: column;
-      margin-top: 20px;
-    }
-    .task-list .tc-card { margin-bottom: 10px; }
-    .task-list .tc-card:last-child { margin-bottom: 0; }
-    .toolbar {
-      display: -ms-flexbox; display: flex;
-      -ms-flex-align: center; align-items: center;
-      margin-bottom: 4px;
-    }
-    .toolbar .filter-btn { margin-right: 8px; }
-    .toolbar .filter-btn:last-child { margin-right: 0; }
-    .filter-btn {
-      background: transparent; border: 1px solid #e4e2da;
-      border-radius: 20px; padding: 4px 14px; font-size: 12px;
-      font-weight: 500; cursor: pointer; color: #6b6b67;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      -webkit-transition: all .15s; transition: all .15s;
-    }
-    .filter-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
-    .count { font-size: 12px; color: #a8a8a3; margin-left: auto; }
-    .empty { text-align: center; padding: 48px 16px; color: #a8a8a3; font-size: 13px; }
-  </style>
+  <script src="lib/require.js"></script>
+  <script src="src/utils/ES_Polyfill.js"></script>
+  <link rel="stylesheet" href="src/styles/global.css">
 </head>
+
 <body>
 
-<!--
-  index.html 里没有任何组件模板和组件 script 标签。
-  模板在各组件的 template.html 里，由 text 插件自动加载。
-  新增组件只需修改 components/index.js，这里永远不用动。
--->
-
-<div id="app">
-  <app-header
-    v-bind:title="'我的项目'"
-    v-bind:pending-count="pendingCount"
-    v-bind:done-count="doneCount"
-    v-on:add="showModal = true"
-  ></app-header>
-
-  <div class="page">
-    <div class="toolbar">
-      <button class="filter-btn" v-bind:class="{ active: filter === 'all' }"  v-on:click="filter = 'all'">全部</button>
-      <button class="filter-btn" v-bind:class="{ active: filter === 'todo' }" v-on:click="filter = 'todo'">待处理</button>
-      <button class="filter-btn" v-bind:class="{ active: filter === 'done' }" v-on:click="filter = 'done'">已完成</button>
-      <span class="count">共 {{ filteredTasks.length }} 条</span>
-    </div>
-    <div class="task-list" v-if="filteredTasks.length > 0">
-      <task-card
-        v-for="task in filteredTasks"
-        v-bind:key="task.id"
-        v-bind:task="task"
-        v-on:toggle="toggleTask"
-        v-on:remove="removeTask"
-      ></task-card>
-    </div>
-    <div class="empty" v-else>暂无任务，点击右上角「新建任务」开始</div>
+  <div id="app">
+    <app></app>
   </div>
 
-  <add-modal
-    v-if="showModal"
-    v-on:submit="addTask"
-    v-on:close="showModal = false"
-  ></add-modal>
-</div>
+  <script>
+    requirejs.config({
+      baseUrl: '',
+      paths: {
+        css: 'plugins/css',
+        html: 'plugins/html'
+      }
+    });
 
-<script src="lib/require.js" data-main="main"></script>
+    // 第一步：加载组件名称列表
+    require(['src/components/index.js'], function (list) {
+
+      // 第二步：根据列表动态加载所有组件模块
+      var paths = list.map(function (name) { return 'src/components/' + name + '/' + name + '.js'; })
+      require(paths, function () {
+        var args = arguments;
+        list.forEach(function (name, i) { Vue.component(name, args[i]); }); // 注册为全局组件
+
+        require(['html!src/App.html'], function (template) {
+          new Vue({
+            el: '#app',
+            components: {
+              app: { template: template }
+            }
+          });
+        })
+        
+      });
+
+    });
+  </script>
 
 </body>
+
 </html>

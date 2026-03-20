@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f5f4f0;
+  color: #1c1c1a;
+  font-size: 14px;
+  min-height: 100vh;
+}
