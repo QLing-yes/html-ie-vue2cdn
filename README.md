@@ -21,9 +21,9 @@
     │   └── global.css            全局样式
     └── components/
         ├── index.js            组件注册表（新增组件时唯一需要改动的文件）
-        └── Counter/
-            ├── template.html   组件模板
-            ├── index.js        组件逻辑
+        └── counter/
+            ├── index.html   组件模板
+            ├── counter.js        组件逻辑(必须和目录同名)
             └── index.css       组件样式
 ```
 

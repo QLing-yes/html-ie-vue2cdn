@@ -35,20 +35,27 @@
       var paths = list.map(function (name) { return 'src/components/' + name + '/' + name + '.js'; })
       require(paths, function () {
         var args = arguments;
-        list.forEach(function (name, i) { Vue.component(name, args[i]); }); // 注册为全局组件
+         // 注册为全局组件
+        list.forEach(function (name, i) {
+          Vue.component(name, parseTemplate(args[i]));
+        });
 
         require(['html!src/App.html'], function (template) {
           new Vue({
             el: '#app',
             components: {
-              app: { template: template }
+              app: parseTemplate({ template: template })
             }
           });
         })
-        
+
       });
 
     });
+
+    function parseTemplate(op) {// 待定：解析html模板，提取 template css js
+      return op;
+    }
   </script>
 
 </body>
